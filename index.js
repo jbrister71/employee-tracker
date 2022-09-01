@@ -7,9 +7,9 @@ const inquirer = require('inquirer');
 const { end } = require('./db/connection');
 
 const displayEmployees = function() {
-    getEmployees();
+    getEmployees()
     displayMainMenu();
-}
+};
 
 const promptEmployee = function() {
     return inquirer.prompt(
