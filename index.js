@@ -4,8 +4,9 @@ const { getRoles, getRoleNames, addRole } = require('./lib/roles');
 const { getEmployees, addEmployee, getManagerNames, updateRole } = require('./lib/employees');
 const cTable = require('console.table');
 const inquirer = require('inquirer');
-const { end } = require('./db/connection');
 
+
+// Displays a table with the data returned from getEmployees() in the Employees.js file
 const displayEmployees = function() {
     getEmployees()
         .then(rows => {
@@ -15,6 +16,9 @@ const displayEmployees = function() {
         });
 };
 
+// Returns an array of roles
+// Set up this way so that the names will be displayed in the console but the id will be passed 
+// when this array is given to inquirer.
 const setRoleChoices = function(rows, roleChoices) {
     return new Promise((resolve, reject) => {
         for(let i = 0; i < rows.length; i++) {
@@ -29,6 +33,9 @@ const setRoleChoices = function(rows, roleChoices) {
     })
 }
 
+// Returns an array of employees with a manager value of null
+// Set up this was so that the names will be displayed in the console but the id will be passed
+// when this array is given to inquirer
 const setManagers = function(rows, managers) {
     managers.push({
         name: 'No manager',
@@ -45,6 +52,7 @@ const setManagers = function(rows, managers) {
     }
 };
 
+// Gets user input and uses it to create a new row on the employee table
 const promptEmployee = function() {
     const roleChoices = [];
     const managers = [];
@@ -111,6 +119,9 @@ const promptEmployee = function() {
         )
 };
 
+// Returns an array of all employees
+// Set up this was so that the names will be displayed in the console but the id will be passed
+// when this array is given to inquirer
 const setEmployees = function(rows, employees) {
     return new Promise((resolve, reject) => {
         for(let i = 0; i < rows.length; i++) {
@@ -126,6 +137,7 @@ const setEmployees = function(rows, employees) {
     });
 }
 
+// Updates the role of the employee that the user chooses
 const updateEmployeeRole = function() {
     const employees = [];
     const roles = [];
@@ -166,6 +178,9 @@ const updateEmployeeRole = function() {
         
 }
 
+// Returns an array of all departments with their ids
+// Set up this was so that the names will be displayed in the console but the id will be passed
+// when this array is given to inquirer
 const setDeparments = function(rows, departmentNames) {
     return new Promise((resolve, reject) => {
         for(let i = 0; i < rows.length; i++) {
@@ -180,6 +195,7 @@ const setDeparments = function(rows, departmentNames) {
     })
 }
 
+// Creates a new role based on user input
 const promptRole = function() {
     const departmentNames = [];
 
@@ -235,6 +251,7 @@ const promptRole = function() {
         })
 };
 
+// Displays a table of roles
 const displayRoles = function() {
     getRoles()
         .then(rows => {
@@ -244,6 +261,7 @@ const displayRoles = function() {
         })
 };
 
+// Creates a new department based on user input
 const promptDepartment = function() {
     return inquirer
     .prompt(
@@ -271,6 +289,7 @@ const promptDepartment = function() {
     })
 };
 
+// Displays a table of all departments
 const displayDepartments = function() {
     getDepartments()
         .then(rows => {
